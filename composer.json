@@ -1,0 +1,41 @@
+{
+    "name": "cv-chameleon/laravel-matomo-tracker",
+    "description": "A Laravel facade/wrapper for the matomo/matomo-php-tracker for server side Matomo tracking.",
+    "authors": [
+        {
+            "name": "Charles Vandeplassche",
+            "email": "charles.vandeplassche@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/cv-chameleon/laravel-matomo-tracker",
+    "keywords": ["Laravel", "Matomo PHP Tracker", "Piwik", "Piwik PHP Tracker", "server side tracking"],
+    "require": {
+        "matomo/matomo-php-tracker": "^3.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chameleon\\MatomoTracker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chameleon\\MatomoTracker\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alfrasc\\MatomoTracker\\LaravelMatomoTrackerServiceProvider"
+            ],
+            "aliases": {
+                "LaravelMatomoTracker": "Alfrasc\\MatomoTracker\\Facades\\LaravelMatomoTracker"
+            }
+        }
+    }
+}
