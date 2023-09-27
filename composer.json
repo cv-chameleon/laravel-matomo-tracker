@@ -31,10 +31,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Alfrasc\\MatomoTracker\\LaravelMatomoTrackerServiceProvider"
+                "Chameleon\\MatomoTracker\\LaravelMatomoTrackerServiceProvider"
             ],
             "aliases": {
-                "LaravelMatomoTracker": "Alfrasc\\MatomoTracker\\Facades\\LaravelMatomoTracker"
+                "LaravelMatomoTracker": "Chameleon\\MatomoTracker\\Facades\\LaravelMatomoTracker"
             }
         }
     }
