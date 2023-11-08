@@ -4,6 +4,7 @@ namespace Chameleon\MatomoTracker\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/** @see \Chameleon\MatomoTracker\LaravelMatomoTracker */
 class LaravelMatomoTracker extends Facade
 {
     /**
