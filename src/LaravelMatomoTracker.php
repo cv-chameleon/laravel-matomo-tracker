@@ -11,8 +11,6 @@ class LaravelMatomoTracker extends MatomoTracker
 
     /** @var string */
     protected $apiUrl;
-    /** @var int */
-    protected $idSite;
     /** @var string */
     protected $tokenAuth;
     /** @var string */
