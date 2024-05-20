@@ -38,10 +38,5 @@
                 "LaravelMatomoTracker": "Chameleon\\MatomoTracker\\Facades\\LaravelMatomoTracker"
             }
         }
-    },
-    "config": {
-        "allow-plugins": {
-            "kylekatarnls/update-helper": true
-        }
     }
 }
