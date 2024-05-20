@@ -31,13 +31,13 @@ class LaravelMatomoTracker extends MatomoTracker
     /**
      * Overrides the PiwikTracker method and uses the \Illuminate\Http\Request for filling in the server vars.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $idSite
-     * @param string $apiUrl
+     * @param Request $request
+     * @param int|null $idSite
+     * @param string|null $apiUrl
      *
      * @return void
      */
-    private function setMatomoVariables(Request $request, int $idSite = null, string $apiUrl = null)
+    private function setMatomoVariables(Request $request, ?int $idSite = null, ?string $apiUrl = null)
     {
 
         $this->apiUrl = $apiUrl ?: config('matomotracker.url');
@@ -137,7 +137,7 @@ class LaravelMatomoTracker extends MatomoTracker
      *
      * @return $this
      */
-    public function setQueue(string $queueName)
+    public function setQueue(string $queueName): self
     {
         $this->queue = $queueName;
         return $this;
@@ -164,8 +164,9 @@ class LaravelMatomoTracker extends MatomoTracker
      * @param array $customDimensions Is an array of objects with the fields 'id' and 'value'
      *
      * @return $this
+     * @throws Exception
      */
-    public function setCustomDimensions(array $customDimensions)
+    public function setCustomDimensions(array $customDimensions): self
     {
         foreach ($customDimensions as $key => $customDimension) {
             $this->checkCustomDimension($customDimension);
@@ -180,6 +181,7 @@ class LaravelMatomoTracker extends MatomoTracker
      * @param object $customDimension
      *
      * @return bool
+     * @throws Exception
      */
     private function checkCustomDimension(object $customDimension): bool
     {
@@ -201,7 +203,7 @@ class LaravelMatomoTracker extends MatomoTracker
                 throw new Exception('Value is not of type string in custom dimension.');
             }
         } else {
-            throw new Exception('Missing property \'id\' in custom dimension.');
+            throw new Exception('Missing property \'value\' in custom dimension.');
         }
 
         return true;
@@ -211,8 +213,10 @@ class LaravelMatomoTracker extends MatomoTracker
      * Sets some custom variables
      *
      * @param array $customVariables
+     * @return LaravelMatomoTracker
+     * @throws Exception
      */
-    public function setCustomVariables(array $customVariables)
+    public function setCustomVariables(array $customVariables): self
     {
         foreach ($customVariables as $customVariable) {
             $this->checkCustomVariable($customVariable);
@@ -228,6 +232,7 @@ class LaravelMatomoTracker extends MatomoTracker
      * @param object $customVariable
      *
      * @return bool
+     * @throws Exception
      */
     private function checkCustomVariable(object $customVariable): bool
     {
@@ -248,7 +253,7 @@ class LaravelMatomoTracker extends MatomoTracker
                 throw new Exception('Name is not of type string in custom variable.');
             }
         } else {
-            throw new Exception('Missing property \'id\' in custom variable.');
+            throw new Exception('Missing property \'name\' in custom variable.');
         }
 
         if (property_exists($customVariable, 'value')) {
@@ -256,7 +261,7 @@ class LaravelMatomoTracker extends MatomoTracker
                 throw new Exception('Value is not of type string in custom variable.');
             }
         } else {
-            throw new Exception('Missing property \'id\' in custom variable.');
+            throw new Exception('Missing property \'value\' in custom variable.');
         }
 
         if (property_exists($customVariable, 'scope')) {
@@ -318,7 +323,7 @@ class LaravelMatomoTracker extends MatomoTracker
      *
      * @return void
      */
-    public function queueEvent(string $category, string $action, $name = false, $value = false)
+    public function queueEvent(string $category, string $action, $name = false, $value = false): void
     {
         dispatch(function () use ($category, $action, $name, $value) {
             $this->doTrackEvent($category, $action, $name, $value);
